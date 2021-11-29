@@ -9,3 +9,7 @@ These are flash files that i am wating for [Ruffle](https://github.com/ruffle-rs
 
 ## ROMs
 Roms for various emulators on ISD279 Games. Here is an [index of them](https://reedgraf.github.io/isd279games/roms/roms.md).
+
+## Other Games
+- MineKhan - A JavaScript version of Minecraft.
+- Rooftop Snipers - A game where you shoot an opponent off of a roof with various weapons on an ever changing building.
