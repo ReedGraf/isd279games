@@ -1,5 +1,5 @@
 # ISD279Games
-These are external resources for the website isd279games. 
+These are external resources for the website isd279games found [here](https://sites.google.com/view/isd-279-games). (The url may change but I will update this one)
 
 ## SWF Files
 Flash files used with [Ruffle](https://github.com/ruffle-rs/ruffle) on the ISD279 Games website.
