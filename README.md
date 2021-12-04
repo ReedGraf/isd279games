@@ -1,4 +1,4 @@
-# ISD279Games - Version 1.3
+# ISD279Games - Version 1.4
 These are external resources for the website isd279games found [here](https://sites.google.com/view/isd-279-games). (The url may change but I will update this one)
 
 ## SWF Files
