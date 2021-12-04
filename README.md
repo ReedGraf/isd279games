@@ -13,3 +13,4 @@ Roms for various emulators on ISD279 Games. Here is an [index of them](https://r
 ## Other Games
 - MineKhan - A JavaScript version of Minecraft.
 - Rooftop Snipers - A game where you shoot an opponent off of a roof with various weapons on an ever changing building.
+- Spider Solitaire - A card game made in HTML5 found [here](https://github.com/leapfroglets/spider-solitaire).
