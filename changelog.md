@@ -1,5 +1,10 @@
 # ChangeLog
 
+## Version 1.6 
+
+- Added contact info and a message to [Bianary Person](https://github.com/binary-person) in [README.md](/README.md)
+- Added [RetroBowl](/retrobowl/)
+
 ## Version 1.5
 
 - Added [changelog.md](/changelog.md)

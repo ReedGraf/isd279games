@@ -4530,15 +4530,15 @@ function MineKhan() {
 		Button.add(width / 2, 395, width / 3, 40, "¯\\_(ツ)_/¯", "multiplayer menu", r => changeScene("main menu"))
 
 		// Settings Sliders
-		Slider.add(width/2, 245, width / 3, 40, "options", "Render Distance", 1, 32, "renderDistance", val => settings.renderDistance = Math.round(val))
-		Slider.add(width/2, 305, width / 3, 40, "options", "FOV", 30, 110, "fov", val => {
+		Slider.add(width/2, 245, width / 3, 40, "options", "Render Distance", 1, 64, "renderDistance", val => settings.renderDistance = Math.round(val))
+		Slider.add(width/2, 305, width / 3, 40, "options", "FOV", 5, 160, "fov", val => {
 			p.FOV(val)
 			if (world) {
 				p.setDirection()
 				world.render()
 			}
 		})
-		Slider.add(width/2, 365, width / 3, 40, "options", "Mouse Sensitivity", 30, 400, "mouseSense", val => settings.mouseSense = val)
+		Slider.add(width/2, 365, width / 3, 40, "options", "Mouse Sensitivity", 5, 1000, "mouseSense", val => settings.mouseSense = val)
 	}
 	function initTextures() {
 		let textureSize = 256
