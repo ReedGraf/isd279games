@@ -2,6 +2,7 @@
 - Alien Hominid
 - Bloons TD 1 & 2
 - Duck Life 1-4
+- Fancy Pants Adventure
 - Grow Island
 - Learn to Fly
 - Line Rider
