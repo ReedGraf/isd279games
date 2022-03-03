@@ -1,5 +1,8 @@
 # ChangeLog
 
+## IDK wtf happened and 1.7 just is extremely inaccurate
+
+
 ## Version 1.7 - Pre-Release 2 
 - Updated [README.md](/README.md)
 - Updated [Ruffle](/ruffle/)
