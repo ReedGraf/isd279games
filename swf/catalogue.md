@@ -9,4 +9,4 @@
 - Papa's Pizzeria
 - Super Smash Flash
 - The World's Hardest Game
-- Vex 1 & 2
+- The Henry Stickmin Collection

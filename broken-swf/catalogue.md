@@ -4,3 +4,4 @@ This is a catalogue of SWF files that don't function properly or don't launch en
 - Bloons TD 3
 - Bloons TD 4
 - Learn 2 Fly
+- Vex 1 & 2
