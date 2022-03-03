@@ -7,6 +7,7 @@
 - Updated the several catalogue markdown files.
 - Added 8 Solitaire games
 - Added Henry Stickmin 1-6
+- Replaced original spider solitaire with a flash version
 
 ## Version 1.7 - Pre-Release 1
 
