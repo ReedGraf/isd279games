@@ -1,9 +1,13 @@
 # ChangeLog
 
+## Version 1.8 - Pre-Release 2
+- Updated [README.md](/README.md)
+- Trying out some Nintendo DS game emulation using [emulatorjs](https://github.com/ethanaobrien/emulatorjs), go check them out! 
+
 ## IDK wtf happened and 1.7 just is extremely inaccurate
 
 
-## Version 1.7 - Pre-Release 2 
+## Version 1.8 - Pre-Release 1 
 - Updated [README.md](/README.md)
 - Updated [Ruffle](/ruffle/)
 - Moved Vex 1 & 2 to [broken-swf](/broken-swf/)
