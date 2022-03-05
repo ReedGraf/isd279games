@@ -1,4 +1,4 @@
-# ISD279Games - Version 1.7
+# ISD279Games - Version 1.8 - Pre-Release 3
 
 <!-- Top Badges By: https://shields.io -->
 ![latest](https://img.shields.io:/github/v/release/ReedGraf/isd279games?style=flat-square) ![top Lang](https://img.shields.io:/github/languages/top/ReedGraf/isd279games?style=flat-square) ![lang count](https://img.shields.io:/github/languages/count/ReedGraf/isd279games?style=flat-square) ![google site](https://img.shields.io:/website?down_color=red&down_message=offline&label=Google%20Site&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2Fsites.google.com%2Fview%2Fisd-279-games) ![github site](https://img.shields.io:/website?down_color=red&down_message=offline&label=GitHub%20Site&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2Freedgraf.github.io%2Fisd279games%2F)
