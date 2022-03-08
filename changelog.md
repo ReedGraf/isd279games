@@ -7,6 +7,8 @@
 - Added [arc.io](https://arc.io) to several of the games.
 - Other changes include those of the pre-releases
 
+---
+
 > ## Version 1.8 - Pre-Release 3
 
 - Updated [README.md](/README.md)
