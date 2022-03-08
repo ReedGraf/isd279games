@@ -1,17 +1,26 @@
 # ChangeLog
 
+> ## Version 1.8 - Release
+
+- Updated [README.md](/README.md)
+- Updated [Ruffle](/ruffle/) to Nightly 2022-03-08
+- Added [arc.io](https://arc.io) to several of the games.
+- Other changes include those of the pre-releases
+
 > ## Version 1.8 - Pre-Release 3
+
 - Updated [README.md](/README.md)
 - Cleaned up [changelog.md](/changelog.md)
 - Updated [Ruffle](/ruffle/)
 - Fixed the swf [catalogue.md](/swf/catalogue.md) file
 - Added embed file for use with pointer-lock bypass so I can run a game inside an iframe.
-    - Plans for Full Release: To have the ability to use a query string to specify the ROM being loaded.
+  - Plans for Full Release: To have the ability to use a query string to specify the ROM being loaded.
 - Removed empty-ish folder called "retro-bowl"
 
 ---
 
 > ## Version 1.8 - Pre-Release 2
+
 - Updated [README.md](/README.md)
 - Trying out some Nintendo DS game emulation using [emulatorjs](https://github.com/ethanaobrien/emulatorjs), go check them out! 
 
@@ -21,7 +30,8 @@
 
 ---
 
-> ## Version 1.8 - Pre-Release 1 
+> ## Version 1.8 - Pre-Release 1
+
 - Updated [README.md](/README.md)
 - Updated [Ruffle](/ruffle/)
 - Moved Vex 1 & 2 to [broken-swf](/broken-swf/)

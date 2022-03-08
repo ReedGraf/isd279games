@@ -1,7 +1,7 @@
-# ISD279Games - Version 1.8 - Pre-Release 3
+# ISD279Games - Version 1.8
 
 <!-- Top Badges By: https://shields.io -->
-![latest](https://img.shields.io:/github/v/release/ReedGraf/isd279games?style=flat-square) ![top Lang](https://img.shields.io:/github/languages/top/ReedGraf/isd279games?style=flat-square) ![lang count](https://img.shields.io:/github/languages/count/ReedGraf/isd279games?style=flat-square) ![google site](https://img.shields.io:/website?down_color=red&down_message=offline&label=Google%20Site&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2Fsites.google.com%2Fview%2Fisd-279-games) ![github site](https://img.shields.io:/website?down_color=red&down_message=offline&label=GitHub%20Site&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2Freedgraf.github.io%2Fisd279games%2F)
+[![latest](https://img.shields.io:/github/v/release/ReedGraf/isd279games?style=flat-square)](https://github.com/ReedGraf/isd279games/releases/latest) ![top Lang](https://img.shields.io:/github/languages/top/ReedGraf/isd279games?style=flat-square) ![lang count](https://img.shields.io:/github/languages/count/ReedGraf/isd279games?style=flat-square) [![google site](https://img.shields.io:/website?down_color=red&down_message=offline&label=Google%20Site&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2Fsites.google.com%2Fview%2Fisd-279-games)](https://sites.google.com/view/isd-279-games) [![github site](https://img.shields.io:/website?down_color=red&down_message=offline&label=GitHub%20Site&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2Freedgraf.github.io%2Fisd279games%2F)](https://reedgraf.github.io/isd279games)
 
 These are external resources for the website isd279games found [here](https://sites.google.com/view/isd-279-games). (The URL may change but I will update this one)
 
@@ -22,9 +22,11 @@ Flash files used with [Ruffle](https://github.com/ruffle-rs/ruffle) on the ISD27
 ---
 
 ## Broken SWF Files
+
 These are flash files that I am waiting for [Ruffle](https://github.com/ruffle-rs/ruffle) to support or to be fixed. A catalogue of them can be found [here](/broken-swf/catalogue.md)
 
 ## ROMs
+
 Roms for various emulators on ISD279 Games. Here is an [index of them](/roms/roms.md).
 
 ## Other Games
