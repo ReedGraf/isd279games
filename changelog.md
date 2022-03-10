@@ -26,8 +26,6 @@
 
 ---
 
----
-
 > ## Version 1.8 - Pre-Release 3
 
 - Updated [README.md](/README.md)
