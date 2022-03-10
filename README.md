@@ -1,4 +1,4 @@
-# ISD279Games - Version 1.8
+# ISD279Games - Version 1.9
 
 <!-- Top Badges By: https://shields.io -->
 [![latest](https://img.shields.io:/github/v/release/ReedGraf/isd279games?style=flat-square)](https://github.com/ReedGraf/isd279games/releases/latest) ![top Lang](https://img.shields.io:/github/languages/top/ReedGraf/isd279games?style=flat-square) ![lang count](https://img.shields.io:/github/languages/count/ReedGraf/isd279games?style=flat-square) [![google site](https://img.shields.io:/website?down_color=red&down_message=offline&label=Google%20Site&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2Fsites.google.com%2Fview%2Fisd-279-games)](https://sites.google.com/view/isd-279-games) [![github site](https://img.shields.io:/website?down_color=red&down_message=offline&label=GitHub%20Site&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2Freedgraf.github.io%2Fisd279games%2F)](https://reedgraf.github.io/isd279games)
@@ -11,7 +11,7 @@ These are external resources for the website isd279games found [here](https://si
 
 ## I want this, but what do I download?
 
-What I reccomend is downloading the latest release in this repository. This is becasue the main branch of this repo has pre-releases and they can be sketchy sometimes.
+What I recommend is downloading the latest release in this repository. This is because the main branch of this repo has pre-releases and they can be sketchy sometimes.
 
 ---
 
@@ -43,6 +43,6 @@ Roms for various emulators on ISD279 Games. Here is an [index of them](/roms/rom
 
 ## Contact Me
 
-Email: ISD279Games@protonmail.com
+Email: ISD279Games@protonmail.com (i lost the login info somewhere so i can't read emails D:)
 
 ---

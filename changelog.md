@@ -1,11 +1,30 @@
 # ChangeLog
 
+> ## Version 1.9
+
+- Updated [README.md](/README.md)
+- Updated [Ruffle](/ruffle/) to Nightly 2022-03-10
+- Moved several things to [misc-games](/misc-games/)
+- Renamed "retro" to [emulator](/emulator/) 
+- Added [argon](/misc-games/argon.html) to [misc-games](/misc-games/)
+- Added [Missiles](/missiles/)
+- Added [Devil Glitch](/devil-glitch/)
+- Added 5 different Pokemon GBA ROMs in [/emulator/gba/](/emulator/gba/)
+- Reworked the entire [emulator](/emulator/) section so I can add future emulators and ROMs.
+- Created a [README.md](/emulator/README.md) for emulator section
+- Modified embeds in the emulator section to support query strings, read the [README.md](/emulator/README.md) for further details in how to use them.
+- Removed roms folder
+
+---
+
 > ## Version 1.8 - Release
 
 - Updated [README.md](/README.md)
 - Updated [Ruffle](/ruffle/) to Nightly 2022-03-08
 - Added [arc.io](https://arc.io) to several of the games.
-- Other changes include those of the pre-releases
+- Other changes include those of the pre-release
+
+---
 
 > ## Version 1.8 - Pre-Release 3
 

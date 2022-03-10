@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--
+    This file: Reed Graf
+    Emulator: https://github.com/ethanaobrien/emulatorjs
+-->
+<html lang="en" style="background-color: rgb(51, 51, 51);">
+<head>
+    <script async src="https://arc.io/widget.min.js#92Y6F9bf"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nintendo DS</title>
+</head>
+<body>
+    <div style="width:90vh;height:90vh;max-width:100%;display:block;
+    margin:0 auto;">
+        <div id="game"></div>
+    </div>
+    <script type="text/javascript">
+        var urlParams;
+        (window.onpopstate = function () {
+            var match,
+                pl     = /\+/g,
+                search = /([^&=]+)=?([^&]*)/g,
+                decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+                query  = window.location.search.substring(1);
+            urlParams = {};
+            while (match = search.exec(query))
+            urlParams[decode(match[1])] = decode(match[2]);
+        })();
+        
+        EJS_player = '#game';
+        EJS_gameUrl = urlParams["rom"];
+        EJS_core = 'nds';
+        EJS_pathtodata = 'https://ethanaobrien.github.io/emulatorjs/data/';
+    </script>
+    <script src="https://ethanaobrien.github.io/emulatorjs/data/loader.js"></script>
+</body>
+</html>

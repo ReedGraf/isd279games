@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script async src="https://arc.io/widget.min.js#92Y6F9bf"></script>
+    <title>Argon</title>
+    <meta
+      name="description"
+      content="Side-scrolling space shooter (in 10 KB of JavaScript). Avoid and destroy squares. Collect discs for power-ups."
+    />
+    <style>
+      body {
+        background: #333;
+        color: #ddd;
+        margin: 0;
+        font-family: georgia;
+        text-align: center;
+        text-shadow: #000 0 0 0.5em;
+      }
+      h1 {
+        font-variant: small-caps;
+        font-size: 3em;
+      }
+      h1 a,
+      #ft a {
+        color: #fff;
+        text-decoration: none;
+      }
+      b {
+        color: orange;
+      }
+      #w {
+        width: 900px;
+        margin: 2em auto 0;
+      }
+      #m {
+        background: #000;
+        margin: 0 0 1em 0;
+      }
+      .hud {
+        font-family: arial;
+        position: relative;
+        display: none;
+      }
+      .up {
+        bottom: -0.5em;
+        margin-bottom: -1.5em;
+      }
+      #lives {
+        text-align: left;
+        left: 0.5em;
+        float: left;
+      }
+      #score {
+        text-align: right;
+        right: 0.5em;
+        float: right;
+      }
+      #hd {
+        position: relative;
+        top: -2.75em;
+        padding: 0 0.5em;
+        overflow: hidden;
+        display: block;
+      }
+      #fps {
+        float: right;
+      }
+      #wpn {
+        float: left;
+        display: none;
+      }
+      #w1,
+      #w2 {
+        margin: 0 1em 0 0.15em;
+        text-align: left;
+        display: inline-block;
+      }
+      #w1 {
+        width: 3em;
+      }
+      #w2 {
+        width: 5em;
+      }
+      .sh {
+        box-shadow: 0px 0px 20px #111;
+        -moz-box-shadow: 0px 0px 20px #111;
+        -webkit-box-shadow: 0px 0px 20px #111;
+        -khtml-box-shadow: 0px 0px 20px #111;
+      }
+      #ft {
+        font-size: 0.8em;
+        margin: 2em 0 0 0;
+        color: #aaa;
+      }
+    </style>
+    <script>
+      var C,
+        P = (PW = PH = 0),
+        SX = (SY = 100),
+        DX = (DY = 0),
+        LX = 60,
+        SCORE = 0,
+        LIVES = 3,
+        DB = [],
+        RC = [],
+        AL = [],
+        PU = [],
+        SB = "block",
+        SN = "none",
+        AC,
+        MX = 1,
+        FIRE1 = (FIRE2 = 0),
+        RW = 5,
+        RH = 3,
+        BEAM = 950,
+        AMAX = 40,
+        RMAX = 20,
+        M = ["Press space to start", 1, 0],
+        MINA,
+        K = (KK = 1),
+        ACTIVE =
+          (INV =
+          FRAME =
+          GTIMER =
+          OLD =
+          OLDF =
+          NEW =
+          FPS =
+          CD =
+          CDM =
+          CDW1 =
+          CDW2 =
+          CDI =
+          CDK =
+          FK =
+          FM =
+          FI =
+          FW1 =
+          FW2 =
+            0),
+        W1 = (W2 = 0),
+        WPN1 = ["Puny", "Double", "Triple", "Inferno"],
+        WPN2 = ["None", "Missile", "Laser I", "Laser II", "Death ray"],
+        LSR = {
+          2: ["#fff", 300, 20],
+          3: ["#90ebea", 600, 30],
+          4: ["#BA55D3", 950, 40],
+        },
+        PWR = [
+          "Cannon upgrade",
+          "Laser upgrade",
+          "Missiles",
+          "Shield +1",
+          "Invulnerability",
+          "Bullet time",
+        ];
+      function $(a) {
+        return document.getElementById(a);
+      }
+      function $$(a, b) {
+        $(a).style.display = b;
+      }
+      function clamp(a, b, c) {
+        return a < b ? b : a > c ? c : a;
+      }
+      function sign(a) {
+        return a == 0 ? 0 : a < 0 ? -1 : 1;
+      }
+      function rr(a, b) {
+        return a + (b - a) * Math.random();
+      }
+      function ri(a) {
+        return Math.round(a * Math.random());
+      }
+      function get_time() {
+        return new Date().getTime();
+      }
+      function score(a) {
+        SCORE += a;
+        $("s").innerHTML = SCORE.toFixed(0);
+      }
+      function shields(a) {
+        LIVES += a;
+        $("l").innerHTML = LIVES;
+      }
+      function up_w(a, b, c) {
+        $(a).innerHTML = b[c];
+      }
+      function r_msr() {
+        M[2] = C.measureText(M[0]);
+      }
+      function respawn(a) {
+        a = AL[a];
+        a[0] = PW;
+        a[2] = rr(18, 50);
+        a[3] = a[2];
+        a[1] = rr(0, PH - a[2]);
+        a[4] = rr(0.1, MX);
+        a[6] = a[7];
+        a[8] = AC;
+      }
+      function c_col(a, b, c, d) {
+        var e,
+          f,
+          g = PH / a,
+          h = (0.5 * (PH - b * a)) / a,
+          j = b * b;
+        for (e = 0; e < a; ++e) {
+          f = AC - 100;
+          AL.push([c, h, b, b, d, 0, j, j, f, 0]);
+          h += g;
+        }
+      }
+      function c_rect(a, b, c, d, e, f, g, h, j) {
+        var k, i, m, n, l, o;
+        for (k = 0; k < a; ++k) {
+          i = rr(f, g);
+          m = Math.round(rr(b, c));
+          n = Math.round(rr(d, e - i));
+          l = i * i;
+          o = rr(0.1, j);
+          AL.push([m, n, i, i, o, 0, l, l, h, 1]);
+        }
+      }
+      function bb_alien(a) {
+        return [a[0], a[0] + a[2], a[1], a[1] + a[3]];
+      }
+      function bb_rocket(a) {
+        return [a[0], a[0] + a[2], a[1], a[1] + a[3]];
+      }
+      function bb_beam(a, b, c) {
+        return [a + 25, a + 25 + c, b - 5, b + 5];
+      }
+      function bb_ship() {
+        return [SX - 10, SX + LX / 2, SY - 7, SY + 7];
+      }
+      function overlap(a, b) {
+        return (
+          ((a[1] > b[0] && a[0] < b[1]) || (b[1] > a[0] && b[0] < a[1])) &&
+          ((a[3] > b[2] && a[2] < b[3]) || (b[3] > a[2] && b[2] < a[3]))
+        );
+      }
+      function hitbeam(a, b, c, d) {
+        return overlap(bb_alien(a), bb_beam(b, c, d));
+      }
+      function hitrocket(a, b) {
+        return overlap(bb_alien(a), bb_rocket(b));
+      }
+      function hitship(a) {
+        return overlap(bb_alien(a), bb_ship());
+      }
+      function hitpowerup(a, b, c) {
+        return Math.abs(a[0] - b) < 40 && Math.abs(a[1] - c) < 10;
+      }
+      function draw_ship() {
+        var a, b;
+        if (INV) {
+          a = "#ddd";
+          b = "#fff";
+        } else {
+          a = "#b00";
+          b = "#e00";
+        }
+        C.fillStyle = a;
+        C.beginPath();
+        C.moveTo(SX - 20, SY);
+        C.lineTo(SX - 10, SY - 15);
+        C.lineTo(SX + LX, SY);
+        C.lineTo(SX - 10, SY + 15);
+        C.fill();
+        C.fillStyle = b;
+        if (W2 > 0) {
+          C.beginPath();
+          C.moveTo(SX, SY - 5);
+          C.lineTo(SX + 55, SY);
+          C.lineTo(SX, SY + 5);
+          C.fill();
+        }
+        C.fillStyle = a;
+        W1 == 1 && C.fillRect(SX + LX - 25, SY - 5, 10, 10);
+        if (W1 > 1) {
+          C.fillRect(SX, SY - 15, 10, 5);
+          C.fillRect(SX, SY + 10, 10, 5);
+        }
+        if (W1 > 2) {
+          C.fillRect(SX - 10, SY - 19, 11, 7);
+          C.fillRect(SX - 10, SY + 13, 11, 6);
+        }
+      }
+      function draw_beam(a, b) {
+        var c = Math.min(a - (SX + 25), LSR[b][1]);
+        C.fillStyle = "rgba(255,255,255,0.15)";
+        C.fillRect(SX + 25, SY - 5, c, 10);
+        C.fillStyle = LSR[b][0];
+        C.fillRect(SX + 25, SY - 1, c, 2);
+      }
+      function draw_rocket(a) {
+        C.fillStyle = a[5];
+        C.fillRect(a[0], a[1], a[2], a[3]);
+      }
+      function draw_debris(a) {
+        C.fillStyle =
+          "hsl(" + a[4] + "," + a[8] + "%," + (50 * a[5]) / a[6] + "%)";
+        C.fillRect(a[0], a[1], a[7], a[7]);
+      }
+      function draw_alien(a) {
+        C.fillStyle =
+          "hsl(" + a[8] + ",90%," + (2 + 50 * clamp(a[4] / MX, 0, 1)) + "%)";
+        C.fillRect(a[0], a[1], a[2], a[3]);
+      }
+      function draw_powerup(a) {
+        C.fillStyle = "rgba(200,200,200," + a[6] / 300 + ")";
+        C.beginPath();
+        C.arc(a[0], a[1], 10, 0, 6.28, 0);
+        C.fill();
+      }
+      function draw_message() {
+        if (M[1]) {
+          C.fillStyle = "rgba(0,0,0,0.75)";
+          C.fillRect(0, 0, PW, PH);
+        }
+        C.fillStyle = CDM > 0 ? "rgba(255,255,255," + CDM / 100 + ")" : "#fff";
+        C.fillText(M[0], (PW - M[2].width) / 2, PH / 2);
+      }
+      function fire_rockets(a) {
+        if (a == 0 || a > 1)
+          RC.push([SX + LX, SY, RW, RH, 0, "#ffff00", DX, DY, 0]);
+        if (a == 1) {
+          RC.push([SX + LX, SY + 3, RW, RH, 0, "#ffff00", DX, DY, 0]);
+          RC.push([SX + LX, SY - 3, RW, RH, 0, "#ffff00", DX, DY, 0]);
+        }
+        if (a == 2 || a == 3) {
+          RC.push([SX + 7, SY - 15, RW, RH, -0.15, "#ffdd00", DX, DY, 0]);
+          RC.push([SX + 7, SY + 12, RW, RH, 0.15, "#ffdd00", DX, DY, 0]);
+        }
+        if (a == 3) {
+          RC.push([SX, SY - 18, RW, RH, -0.5, "#ffb300", DX, DY, 0]);
+          RC.push([SX, SY + 16, RW, RH, 0.5, "#ffb300", DX, DY, 0]);
+        }
+      }
+      function fire_missile() {
+        RC.push([
+          SX + LX,
+          SY,
+          3 * RW,
+          2 * RH,
+          0,
+          "#fff",
+          3 * clamp(DX, 0, 1e3),
+          DY,
+          1,
+        ]);
+      }
+      function spawn_powerup(a) {
+        var b = 0;
+        if (Math.random() < 0.6) b = ri(5);
+        PU.push([
+          a[0] + a[2] / 2,
+          a[1] + a[3] / 2,
+          a[2] / 2,
+          0.2 * a[4],
+          0.2 * a[5],
+          a[8],
+          300,
+          b,
+        ]);
+      }
+      function add_debris(a, b) {
+        var c,
+          d,
+          e,
+          f,
+          g,
+          h = (50 * a[7]) / (AMAX * AMAX);
+        for (c = 0; c < h; ++c) {
+          d = rr(30, 120);
+          e = rr(1, 5);
+          f = a[4] + ((5 - e) / 5) * rr(-1, 1);
+          g = a[5] + ((5 - e) / 5) * rr(-1, 1);
+          DB.push([
+            a[0] + rr(0, a[2]),
+            a[1] + rr(0, a[3]),
+            f,
+            g,
+            a[8],
+            d,
+            d,
+            e,
+            b,
+          ]);
+        }
+      }
+      function game_over() {
+        ACTIVE = 0;
+        M = ["Game over", 1];
+        CDM = 100;
+        r_msr();
+        $$("wpn", SN);
+        $$("lives", SN);
+        $$("i", SB);
+      }
+      function die() {
+        LIVES || game_over();
+        shields(-1);
+      }
+      function game_start() {
+        $$("lives", SB);
+        $$("score", SB);
+        $$("wpn", SB);
+        window.innerHeight < 800 && $$("i", SN);
+        ACTIVE = 1;
+        FRAME =
+          SCORE =
+          FIRE1 =
+          FIRE2 =
+          W1 =
+          W2 =
+          CD =
+          CDM =
+          CDW1 =
+          CDW2 =
+          CDI =
+          FM =
+          FI =
+          FW1 =
+          FW2 =
+            0;
+        M = [0, 0];
+        SX = SY = 100;
+        MX = 1;
+        LIVES = 3;
+        RC = [];
+        DB = [];
+        AL = [];
+        AC = ri(360);
+        c_rect(40, PW / 2, PW, 0, PH, 18, 30, AC, MX);
+        score(0);
+        shields(0);
+      }
+      function render() {
+        C.clearRect(0, 0, PW, PH);
+        AL.sort(function (b, c) {
+          return b[4] - c[4];
+        });
+        var a;
+        for (a = 0; a < RC.length; ++a) draw_rocket(RC[a]);
+        for (a = 0; a < AL.length; ++a) draw_alien(AL[a]);
+        for (a = 0; a < PU.length; ++a) draw_powerup(PU[a]);
+        ACTIVE && draw_ship();
+        ACTIVE && FIRE2 && W2 > 1 && draw_beam(MINA, W2);
+        for (a = 0; a < DB.length; ++a) draw_debris(DB[a]);
+        M[0] && draw_message();
+      }
+      function animate() {
+        if (ACTIVE) {
+          FIRE1 && FRAME % 14 == 0 && fire_rockets(W1);
+          if (FIRE2 && W2 == 1 && CD <= 0) {
+            fire_missile();
+            FIRE2 = 0;
+            CD = 30;
+          }
+          AL.sort(function (f, g) {
+            return f[0] - g[0];
+          });
+        }
+        var a,
+          b,
+          c,
+          d,
+          e = 0;
+        for (a = 0; a < RC.length; ++a) {
+          c = RC[a];
+          if (ACTIVE)
+            for (b = 0; b < AL.length; ++b) {
+              d = AL[b];
+              if (hitrocket(c, d)) {
+                if (c[8]) {
+                  d[6] = -5;
+                  d[4] -= 1 + c[6] / 2;
+                  d[5] -= c[4] + c[7];
+                } else {
+                  d[6] -= K * 100;
+                  add_debris([d[0], c[1], 5, 5, d[4], d[5], 0, 50, d[8]], 50);
+                }
+                c[0] = 1e3;
+              }
+            }
+          c[0] += K * (2 + c[6]);
+          c[1] += K * (c[4] + c[7]);
+          c[8] &&
+            add_debris([c[0] - 7, c[1] - 2, 5, 6, c[6], 0, 0, 100, 60], 0);
+          if (c[0] > PW || c[1] < 0 || c[1] > PH) RC.splice(a, 1);
+        }
+        MINA = PW;
+        for (a = 0; a < AL.length; ++a) {
+          d = AL[a];
+          if (d[6] < 0) {
+            add_debris(d, 50);
+            Math.random() < 0.3 && spawn_powerup(d);
+            d[0] = 1e3;
+          }
+          if (ACTIVE && hitship(d)) {
+            add_debris(d, 50);
+            d[0] = 1e3;
+            if (!INV) {
+              add_debris(
+                [SX - 10, SY - 10, 10 + LX / 2, 20, -DX, -DY, 0, 2e3, 0, 0],
+                50
+              );
+              die();
+            }
+          }
+          if (FIRE2 && W2 > 1 && !e)
+            if (hitbeam(d, SX, SY, LSR[W2][1])) {
+              d[6] -= K * LSR[W2][2];
+              add_debris(
+                [d[0], SY - 2.5, 5, 5, d[4], d[5], 0, 50, d[8], 0],
+                50
+              );
+              if (d[0] < MINA) MINA = d[0];
+              e = 1;
+            }
+          d[0] -= K * d[4];
+          d[0] < -40 && respawn(a);
+        }
+        for (a = 0; a < AL.length; ++a) {
+          d = AL[a];
+          if (d[0] > PW) {
+            score(d[7]);
+            d[9] ? respawn(a) : AL.splice(a, 1);
+          }
+        }
+        for (a = 0; a < DB.length; ++a) {
+          b = DB[a];
+          b[0] -= K * b[2];
+          b[1] -= K * b[3];
+          b[5] -= K;
+          b[5] < 0 && DB.splice(a, 1);
+        }
+        for (a = 0; a < PU.length; ++a) {
+          b = PU[a];
+          if (ACTIVE && hitpowerup(b, SX, SY)) {
+            c = b[7];
+            M = [PWR[c], 0];
+            CDM = 100;
+            FM = 1;
+            r_msr();
+            PU.splice(a, 1);
+            if (c == 0) {
+              W1 = clamp(W1 + 1, 0, 3);
+              up_w("w1", WPN1, W1);
+              CDW1 = 1e3;
+              FW1 = 1;
+            }
+            if (c == 1) {
+              W2 = clamp(W2 + 1, 2, 4);
+              up_w("w2", WPN2, W2);
+              CDW2 = 850;
+              FW2 = 1;
+            }
+            if (c == 2) {
+              W2 = 1;
+              up_w("w2", WPN2, W2);
+              CDW2 = 500;
+              FW2 = 1;
+            }
+            c == 3 && shields(1);
+            if (c == 4) {
+              INV = 1;
+              CDI = 500;
+              FI = 1;
+            }
+            if (c == 5) {
+              KK = 0.5;
+              CDK = 200;
+              FK = 1;
+            }
+          }
+          b[0] -= K * b[3];
+          b[1] -= K * b[4];
+          b[6] -= K;
+          b[6] < 0 && PU.splice(a, 1);
+        }
+        if (ACTIVE) {
+          if (CD > 0) CD -= K;
+          if (CDK > 0) CDK -= K;
+          if (CDM > 0) CDM -= K;
+          if (CDM <= 0 && FM) {
+            M = [0, 0];
+            FM = 0;
+          }
+          if (CDW1 > 0) CDW1 -= K;
+          if (CDW1 <= 0 && FW1) {
+            W1--;
+            CDW1 = 500;
+            W1 = clamp(W1, 0, 3);
+            up_w("w1", WPN1, W1);
+            if (W1 == 0) FW1 = 0;
+          }
+          if (CDW2 > 0) CDW2 -= K;
+          if (CDW2 <= 0 && FW2) {
+            if (W2 == 2) W2 = 0;
+            else W2--;
+            CDW2 = 500;
+            W2 = clamp(W2, 0, 4);
+            up_w("w2", WPN2, W2);
+            if (W2 == 0) FW2 = 0;
+          }
+          if (CDI > 0) CDI -= K;
+          if (CDI > 0 && CDI < 300) {
+            M = ["Mortal in " + (CDI / 300).toFixed(2), 0];
+            r_msr();
+            FI = 1;
+          }
+          if (CDI > 0 && CDI < 100) CDM = CDI;
+          if (CDI <= 0 && FI) {
+            INV = 0;
+            M = [0, 0];
+            FI = 0;
+          }
+          if (CDK <= 0 && FK) {
+            KK = 1;
+            FK = 0;
+          }
+        }
+        render();
+        SX = clamp(SX + K * 1.5 * DX, 0, PW);
+        SY = clamp(SY + K * 1.5 * DY, 0, PH);
+        if (OLD) {
+          NEW = get_time();
+          DELTA = NEW - OLD;
+          K = (KK * DELTA) / 16;
+          OLD = NEW;
+          if (FRAME % 100 == 0) {
+            FPS = 100 / ((NEW - OLDF) / 1e3);
+            OLDF = NEW;
+            $("f").innerHTML = FPS.toFixed(1);
+          }
+        } else OLDF = OLD = get_time();
+        if (ACTIVE) {
+          if (FRAME % 30 == 0) MX = clamp(MX + K * 0.005, 1, 4);
+          if (FRAME % 300 == 0) {
+            c_rect(1, PW, PW, SY - 50, SY + 50, 18, RMAX, AC, MX);
+            RMAX = clamp(RMAX + K * 2.5, 18, 70);
+          }
+          FRAME % 3e3 == 0 && c_col(10, 30, PW, 0.5);
+        }
+        FRAME++;
+      }
+      function h_keydown(a) {
+        var b = 0;
+        switch (a.which) {
+          case 40:
+            b = DY = 1;
+            break;
+          case 38:
+            DY = -1;
+            b = 1;
+            break;
+          case 37:
+            DX = -1;
+            b = 1;
+            break;
+          case 39:
+            b = DX = 1;
+            break;
+          case 90:
+            FIRE1 = 1;
+            break;
+          case 88:
+            FIRE2 = 1;
+            break;
+          case 32:
+            ACTIVE || game_start();
+            b = 1;
+            break;
+          case 27:
+            game_over();
+            b = 1;
+            break;
+        }
+        b && a.preventDefault();
+      }
+      function h_keyup(a) {
+        var b = 0;
+        switch (a.which) {
+          case 40:
+          case 38:
+            DY = 0;
+            b = 1;
+            break;
+          case 37:
+          case 39:
+            DX = 0;
+            b = 1;
+            break;
+          case 90:
+            FIRE1 = 0;
+            break;
+          case 88:
+            FIRE2 = 0;
+            break;
+        }
+        b && a.preventDefault();
+      }
+      function start() {
+        P = $("m");
+        PW = P.offsetWidth;
+        PH = P.offsetHeight;
+        C = P.getContext("2d");
+        C.font = "20pt arial bold";
+        r_msr();
+        AC = 160 + ri(140);
+        c_rect(100, 0, PW, 0, PH, 10, 40, AC, MX);
+        GTIMER = setInterval(animate, 16);
+        document.onkeydown = function (a) {
+          h_keydown(a);
+        };
+        document.onkeyup = function (a) {
+          h_keyup(a);
+        };
+      }
+    </script>
+  </head>
+  <body onload="start()">
+    <h1>Argon</h1>
+    <div id="w">
+      <div id="score" class="hud up"><b>Score:</b> <span id="s">0</span></div>
+      <div id="lives" class="hud up"><b>Shields:</b> <span id="l">3</span></div>
+      <canvas id="m" width="900" height="400" class="sh"></canvas>
+      <div id="hd" class="hud">
+        <div id="wpn">
+          <b>W1:</b> <span id="w1">Puny</span> <b>W2:</b
+          ><span id="w2">None</span>
+        </div>
+        <div id="fps"><b>FPS:</b> <span id="f">0</span></div>
+      </div>
+      <div id="i">
+        Destroy squares, collect discs<br /><br /><b>Arrows:</b> move<br /><b
+          >Z:</b
+        >
+        fire1<br /><b>X:</b> fire2<br /><br /><b>Space:</b> new game<br /><b
+          >Esc:</b
+        >
+        quit<br />
+        <div id="ft">
+          Created by AlteredQualia
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
