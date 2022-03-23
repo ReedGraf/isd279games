@@ -7,6 +7,12 @@ These are external resources for the website isd279games found [here](https://si
 
 ---
 
+## End of Life
+
+There will be no more updates to this repo. This is the end D:
+
+---
+
 <!-- Main Text body-->
 
 ## I want this, but what do I download?
