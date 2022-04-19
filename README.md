@@ -9,7 +9,7 @@ These are external resources for the website isd279games found [here](https://si
 
 ## End of Life
 
-There will be no more updates to this repo. I was pulled aside while in school about the website and I cannot continue updating/hosting the site. What remains is at [https://sites.google.com/3-isd279games](https://sites.google.com/3-isd279games)
+There will be no more updates to this repo. I was pulled aside while in school about the website and I cannot continue updating/hosting the site. What remains is at [https://sites.google.com/view/3-isd279games](https://sites.google.com/view/3-isd279games)
 
 ---
 
