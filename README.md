@@ -1,4 +1,4 @@
-# ISD279Games - Version 1.9
+# ISD279Games - Version 1.9 [Ended]
 
 <!-- Top Badges By: https://shields.io -->
 [![latest](https://img.shields.io:/github/v/release/ReedGraf/isd279games?style=flat-square)](https://github.com/ReedGraf/isd279games/releases/latest) ![top Lang](https://img.shields.io:/github/languages/top/ReedGraf/isd279games?style=flat-square) ![lang count](https://img.shields.io:/github/languages/count/ReedGraf/isd279games?style=flat-square) [![google site](https://img.shields.io:/website?down_color=red&down_message=offline&label=Google%20Site&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2Fsites.google.com%2Fview%2Fisd-279-games)](https://sites.google.com/view/isd-279-games) [![github site](https://img.shields.io:/website?down_color=red&down_message=offline&label=GitHub%20Site&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2Freedgraf.github.io%2Fisd279games%2F)](https://reedgraf.github.io/isd279games)
@@ -9,7 +9,7 @@ These are external resources for the website isd279games found [here](https://si
 
 ## End of Life
 
-There will be no more updates to this repo. This is the end D:
+There will be no more updates to this repo. I was pulled aside while in school about the website and I cannot continue updating/hosting the site. What remains is at [https://sites.google.com/3-isd279games](https://sites.google.com/3-isd279games)
 
 ---
 
